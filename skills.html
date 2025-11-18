@@ -18,7 +18,7 @@
         </nav>
     </header>
 
-    <main>
+    <main id="page">
         <h1>My Skills</h1>
         <div class="list-intro">
             <section class="skills">
@@ -58,5 +58,25 @@
         <br>
         <p>© 2025 Jongwon Lee</p>
     </footer>
+    <script>
+        if (document.startViewTransition) {
+            document.addEventListener("click", (e) => {
+                const link = e.target.closest("a[href]");
+                if (!link) return;
+
+                if (link.origin !== location.origin) return;
+
+                if (link.target === "_blank") return;
+
+                if (link.pathname === location.pathname) return;
+
+                e.preventDefault();
+
+                document.startViewTransition(() => {
+                window.location.href = link.href;
+                });
+             });
+        }
+    </script>
 </body>
 </html>

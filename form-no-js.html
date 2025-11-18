@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Form (No JS)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    :root {
+      --bg-color: #f5f5f5;
+      --text-color: #111;
+      --card-bg: #ffffff;
+      --accent-color: #0055aa;
+      --accent-color-soft: #e0efff;
+      --error-color: #b00020;
+      --error-soft: #fde7ea;
+      --info-color: #0b6cbc;
+      --info-soft: #e3f2fd;
+      --border-color: #cccccc;
+      --border-radius: 0.75rem;
+      --input-padding: 0.6rem 0.8rem;
+      --max-content-width: 640px;
+      --focus-outline: 2px solid #ffbf00;
+      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-main);
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.5;
+    }
+
+    header {
+      padding: 1.5rem 1rem 0.5rem;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0 0 0.5rem;
+      font-size: 1.8rem;
+    }
+
+    header p {
+      margin: 0 auto;
+      max-width: var(--max-content-width);
+      font-size: 0.95rem;
+      color: #444;
+    }
+
+    main {
+      display: flex;
+      justify-content: center;
+      padding: 1.5rem 1rem 2.5rem;
+    }
+
+    .form-card {
+      width: 100%;
+      max-width: var(--max-content-width);
+      background-color: var(--card-bg);
+      border-radius: var(--border-radius);
+      border: 1px solid var(--border-color);
+      padding: 1.5rem 1.25rem 1.75rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+    }
+
+    .form-card h2 {
+      margin-top: 0;
+      margin-bottom: 0.75rem;
+      font-size: 1.3rem;
+    }
+
+    .form-card p.helper-text {
+      margin-top: 0;
+      margin-bottom: 1.25rem;
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .form-group-inline {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    label {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .required-indicator {
+      color: var(--error-color);
+      margin-left: 0.15rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select,
+    textarea {
+      padding: var(--input-padding);
+      border-radius: 0.5rem;
+      border: 1px solid var(--border-color);
+      font-size: 0.95rem;
+      font-family: inherit;
+      background-color: #fff;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #999;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 2px var(--accent-color-soft);
+    }
+
+    /* Validation styling */
+
+    input:required,
+    textarea:required {
+      border-left-width: 3px;
+      border-left-color: #ffb74d;
+    }
+
+    input:required:invalid,
+    textarea:required:invalid {
+      border-color: var(--error-color);
+      border-left-color: var(--error-color);
+      background-color: #fffafa;
+    }
+
+    input:valid,
+    textarea:valid {
+      border-color: #2e7d32;
+      border-left-color: #2e7d32;
+    }
+
+    input:invalid:focus,
+    textarea:invalid:focus {
+      box-shadow: 0 0 0 2px var(--error-soft);
+    }
+
+    .radio-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+    }
+
+    .radio-option {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .hint {
+      font-size: 0.8rem;
+      color: #666;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    button[type="submit"],
+    button[type="reset"] {
+      padding: 0.55rem 1.3rem;
+      border-radius: 999px;
+      border: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    button[type="submit"] {
+      background-color: var(--accent-color);
+      color: #fff;
+    }
+
+    button[type="submit"]:hover {
+      filter: brightness(1.05);
+    }
+
+    button[type="reset"] {
+      background-color: #e0e0e0;
+      color: #222;
+    }
+
+    button[type="reset"]:hover {
+      filter: brightness(1.04);
+    }
+
+    .form-messages {
+      margin-top: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    output {
+      display: block;
+      min-height: 1.4em;
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.5rem;
+      font-size: 0.85rem;
+    }
+
+    #form-error-output {
+      background-color: var(--error-soft);
+      color: var(--error-color);
+      border: 1px solid var(--error-color);
+    }
+
+    #form-info-output {
+      background-color: var(--info-soft);
+      color: var(--info-color);
+      border: 1px solid var(--info-color);
+    }
+
+    output:empty {
+      padding: 0;
+      border: none;
+      min-height: 0;
+    }
+
+    :focus-visible {
+      outline: var(--focus-outline);
+      outline-offset: 3px;
+    }
+
+    @media (max-width: 600px) {
+      .form-card {
+        padding: 1.25rem 1rem 1.5rem;
+      }
+      .form-group-inline {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Contact Me</h1>
+    <p>
+      Use this form to reach out about opportunities, collaborations, or questions.
+      Fields marked with <span class="required-indicator" aria-hidden="true">*</span> are required.
+    </p>
+  </header>
+
+  <main>
+    <section class="form-card" aria-labelledby="contact-heading">
+      <h2 id="contact-heading">Contact Form (HTML/CSS Only)</h2>
+      <p class="helper-text">
+        This version relies only on built-in HTML and CSS validation (no JavaScript)
+      </p>
+
+      <form
+        id="contact-form"
+        action="https://httpbin.org/post"
+        method="POST"
+        novalidate
+      >
+        <!-- required hidden field -->
+        <input type="hidden" name="possible_bot" value="true">
+
+        <div class="form-group form-group-inline">
+          <div class="form-group">
+            <label for="name">
+              Name
+              <span class="required-indicator" aria-hidden="true">*</span>
+            </label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              placeholder="Jongwon Lee"
+              required
+              minlength="2"
+              maxlength="50"
+              pattern="[A-Za-z][A-Za-z\s'-]{1,49}"
+            >
+            <p class="hint">Letters, spaces, hyphens, and apostrophes only.</p>
+          </div>
+
+          <div class="form-group">
+            <label for="email">
+              Email
+              <span class="required-indicator" aria-hidden="true">*</span>
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="you@example.com"
+              required
+              maxlength="80"
+            >
+            <p class="hint">We’ll use this to respond to you.</p>
+          </div>
+        </div>
+
+        <div class="form-group form-group-inline">
+          <div class="form-group">
+            <label for="phone">
+              Phone (optional)
+            </label>
+            <input
+              id="phone"
+              name="phone"
+              type="tel"
+              placeholder="(123) 456-7890"
+              pattern="[\d\s()+-]{7,20}"
+              maxlength="20"
+            >
+            <p class="hint">Digits, spaces, parentheses, + and - only.</p>
+          </div>
+
+          <div class="form-group">
+            <label for="reason">
+              Reason for contacting
+              <span class="required-indicator" aria-hidden="true">*</span>
+            </label>
+            <select id="reason" name="reason" required>
+              <option value="" selected disabled>Choose an option…</option>
+              <option value="project">Project / collaboration</option>
+              <option value="job">Job / internship opportunity</option>
+              <option value="question">Question about my work</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <fieldset>
+            <legend>
+              Preferred contact method
+              <span class="required-indicator" aria-hidden="true">*</span>
+            </legend>
+            <div class="radio-group">
+              <label class="radio-option">
+                <input type="radio" name="contact-preference" value="email" required>
+                <span>Email</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="contact-preference" value="phone">
+                <span>Phone</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="contact-preference" value="either">
+                <span>Either is fine</span>
+              </label>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="form-group">
+          <label for="comments">
+            Comments / message
+            <span class="required-indicator" aria-hidden="true">*</span>
+          </label>
+          <textarea
+            id="comments"
+            name="comments"
+            placeholder="Tell me a bit about why you're reaching out…"
+            required
+            minlength="10"
+            maxlength="300"
+          ></textarea>
+          <p class="hint">
+            Between 10 and 300 characters.
+          </p>
+        </div>
+
+        <div class="button-row">
+          <button type="submit">Send message</button>
+          <button type="reset">Clear</button>
+        </div>
+      </form>
+    </section>
+  </main>
+</body>
+</html>
