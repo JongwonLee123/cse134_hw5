@@ -5,18 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio Page</title>
     <link rel="stylesheet" href="style.css">
-    <style> 
+    <style>
         project-card {
-            display: block;
-            width: 400px;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
-            font-family: system-ui, san-serif;
+            width: 100%;
+            max-width: 500px;
         }
     </style>
 </head>
+
 <body> 
     <header>
         <nav>
@@ -32,128 +28,24 @@
     <main id="portfolio-main">
         <div id="page">
             <h1>My Portfolio</h1>
-            <div class="project-container">
-                <section class="personal-projects">
-                <div class="project-list">
-                    <h2>Personal Projects</h2>
 
-                    <project-card>
-                    <picture>
-                        <source srcset="./images/projects/portfolio-project.webp" media="(max-width: 600px)" type="image/webp">
-                        <img src="./images/projects/portfolio-project.png" alt="Screenshot of Personal Portfolio Website" loading="lazy" width="400" height="250">
-                    </picture>
-                    <div class="project-content">
-                        <h3>
-                        <a href="https://github.com/JongwonLee123/react-portfolio" target="_blank" class="project-link">
-                            Personal Portfolio Website
-                        </a>
-                        </h3>
-                        <p>
-                        A responsive portfolio website built with HTML, CSS, and JavaScript to showcase my web development projects, skills, and contact information.
-                        </p>
-                    </div>
-                    </project-card>
-
-                    <project-card>
-                    <picture>
-                        <source srcset="./images/projects/pipedrop-project.webp" media="(max-width: 600px)" type="image/webp">
-                        <img src="./images/projects/pipedrop-project.png" alt="Gameplay screenshot of the Pipedrop MIPS Assembly Game" loading="lazy" width="400" height="250">
-                    </picture>
-                    <div class="project-content">
-                        <h3>
-                        <a href="https://github.com/JongwonLee123/CS_118_Pipe_Drop_Game" target="_blank" class="project-link">
-                            Pipedrop MIPS Assembly Game
-                        </a>
-                        </h3>
-                        <p>
-                        A retro-style falling pipe puzzle game implemented entirely in MIPS assembly, focusing on algorithmic optimization and low-level graphics rendering.
-                        </p>
-                    </div>
-                    </project-card>
-
-                    <project-card>
-                    <picture>
-                        <source srcset="./images/projects/marvel-project.webp" media="(max-width: 600px)" type="image/webp">
-                        <img src="./images/projects/marvel-project.png" alt="Homepage of Marvel Comic Website project" loading="lazy" width="400" height="250">
-                    </picture>
-                    <div class="project-content">
-                        <h3>
-                        <a href="https://github.com/JongwonLee123/MarvelComic" target="_blank" class="project-link">
-                            Marvel Comic Website
-                        </a>
-                        </h3>
-                        <p>
-                        A fan-based website that dynamically loads Marvel Comics data using a public API, designed with Flexbox and custom animations for an interactive experience.
-                        </p>
-                    </div>
-                    </project-card>
-                </div>
-                </section>
-                <section class="group-projects">
-                <div class="project-list">
-                    <h2>Group Projects</h2>
-
-                    <project-card>
-                    <picture>
-                        <source srcset="./images/projects/diamond-stocks-project.webp" media="(max-width: 600px)" type="image/webp">
-                        <img src="./images/projects/diamond-stocks-project.png" alt="Interface of the Diamond Stocks Analyzer project" loading="lazy" width="400" height="250">
-                    </picture>
-                    <div class="project-content">
-                        <h3>
-                        <a href="https://github.com/JongwonLee123/Diamond-Stocks" target="_blank" class="project-link">
-                            Diamond Stocks Analyzer
-                        </a>
-                        </h3>
-                        <p>
-                        A financial analysis web app that visualizes real-time stock performance and market trends using React and the Alpha Vantage API.
-                        </p>
-                    </div>
-                    </project-card>
-
-                    <project-card>
-                    <picture>
-                        <source srcset="./images/projects/pokemon-learning-hub-project.webp" media="(max-width: 600px)" type="image/webp">
-                        <img src="./images/projects/pokemon-learning-hub-project.png" alt="Homepage of the Pokémon Learning Hub project" loading="lazy" width="400" height="250">
-                    </picture>
-                    <div class="project-content">
-                        <h3>
-                        <a href="https://cse110-sp25-group17.github.io/cse110-sp25-group17/source/home_page.html" target="_blank" class="project-link">
-                            Pokémon Learning Hub
-                        </a>
-                        </h3>
-                        <p>
-                        A fun educational web app built with HTML, CSS, and JavaScript to teach children basic math through Pokémon-themed mini-games and quizzes.
-                        </p>
-                    </div>
-                    </project-card>
-
-                    <project-card>
-                    <picture>
-                        <source srcset="./images/projects/easy-tracker-project.webp" media="(max-width: 600px)" type="image/webp">
-                        <img src="./images/projects/easy-tracker-project.png" alt="Dashboard screenshot of the Easy Tracker productivity app" loading="lazy" width="400" height="250">
-                    </picture>
-                    <div class="project-content">
-                        <h3>
-                        <a href="https://github.com/JongwonLee123/Easy_Tracker" target="_blank" class="project-link">
-                            Easy Tracker
-                        </a>
-                        </h3>
-                        <p>
-                        A productivity tracker built with React and Firebase that allows users to log goals, visualize progress, and stay motivated with simple UI charts.
-                        </p>
-                    </div>
-                    </project-card>
-                </div>
-                </section>
+            <div class="load-buttons">
+                <button id="load-local">Load Local</button>
+                <button id="load-remote">Load Remote</button>
             </div>
+
+            <div id="project-list"></div>
         </div>
     </main>
-    
+
     <footer>
-        <a href="contact.html">Contact Me</a>
-        <br>
+        <a href="contact.html">Contact Me</a><br>
         <p>© 2025 Jongwon Lee</p>
     </footer>
+
+    <script src="portfolio.js"></script>
+    <script src="project-card.js"></script>
+
     <script>
         if (document.startViewTransition) {
             document.addEventListener("click", (e) => {
@@ -161,18 +53,16 @@
                 if (!link) return;
 
                 if (link.origin !== location.origin) return;
-
                 if (link.target === "_blank") return;
-
                 if (link.pathname === location.pathname) return;
 
                 e.preventDefault();
-
                 document.startViewTransition(() => {
-                window.location.href = link.href;
+                    window.location.href = link.href;
                 });
-             });
+            });
         }
     </script>
+
 </body>
 </html>
