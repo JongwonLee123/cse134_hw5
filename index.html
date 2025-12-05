@@ -5,44 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jongwon Lee's Personal Website</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        #gitLogo {
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        #gitLogo:hover circle {
-            fill: orange;
-        }
-
-        #gitLogo:hover text {
-            fill: black;
-        }
-    </style>
 </head>
+
 <body> 
     <noscript>
         <div class="noscript-message">
-            <p>Some of the features of this website will not work with javascript not working or disabled</p>
+            <p>Some of the features of this website will not work with JavaScript disabled.</p>
         </div>
     </noscript>
-
-    <script>
-        class HelloWorld extends HTMLElement {
-            connectedCallback(){
-                console.log("Hello world!");
-            }
-
-            disconnectedCallback(){
-                //
-            }
-        }
-        customElements.define('hello-world', HelloWorld);
-
-        const canvas = document.getElementById("myCanvas");
-        const ctx = canvas.getContext("2d");
-
-    </script>
 
     <header>
         <nav>
@@ -56,48 +26,12 @@
     </header>
 
     <main id="page">
-        <hello-world></hello-world>
-
-        <dialog open>
-            <p>Greetings, one and all!</p>
-            <form method="dialog">
-                <button>OK</button>
-            </form>
-        </dialog>
-
         <h1>Welcome to Jongwon Lee's Personal Website</h1>
 
-        <div id="main-page-layout">
-            <p id = "equation">
-                Einstein's formula:
-                <math>
-                    <mi>E</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>2</mn></msup>
-                </math>
-            </p>
-
-            <canvas id="myCanvas" width="300" height="200" style="border:1px solid #333;"></canvas>
-
-            <img src="./images/git.png" alt="Slideshow of images" width="200">
-            
-            <div>
-                <svg id="gitLogo" width="200" height="200" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="Git Logo">
-                    <!-- Background shape -->
-                    <circle cx="50" cy="50" r="45" fill="black" />
-
-                    <!-- “git” text -->
-                    <text x="50%" y="57%" text-anchor="middle" font-size="32" fill="white" font-family="Arial" dy=".3em">git</text>
-                </svg>
-            </div>
-
-            <div>
-                <label for="progress-bar">Website progress:</label>
-                <progress id="progress-bar" value="60" max="100">60 %</progress> <br>
-            </div>
-
-            <video controls width="250">
-                <source src="/dancy.mp4" type="video/mp4">
-                <a href="/dancy.mp4">MP4</a>
-            </video>
+        <!-- added slideshow -->
+        <div id="slideshow">
+            <button id="prevBtn" class="slide-btn">&lt;</button>
+            <button id="nextBtn" class="slide-btn">&gt;</button>
         </div>
     </main>
 
@@ -106,25 +40,10 @@
         <br>
         <p>© 2025 Jongwon Lee</p>
     </footer>
-    <script>
-        if (document.startViewTransition) {
-            document.addEventListener("click", (e) => {
-                const link = e.target.closest("a[href]");
-                if (!link) return;
 
-                if (link.origin !== location.origin) return;
+    <!-- script files to handle generating the slideshow and transitions -->
+    <script src="slideshow.js"></script>
+    <script src="transitions.js"></script>
 
-                if (link.target === "_blank") return;
-
-                if (link.pathname === location.pathname) return;
-
-                e.preventDefault();
-
-                document.startViewTransition(() => {
-                window.location.href = link.href;
-                });
-             });
-        }
-    </script>
 </body>
 </html>
